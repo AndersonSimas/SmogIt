@@ -72,7 +72,7 @@
     <Build Include="dbo\Tables\Appointments.sql" />
     <Build Include="dbo\Tables\VehicleMake.sql" />
     <Build Include="dbo\Tables\VehicleModel.sql" />
-    <Build Include="dbo\Tables\TestDeployReport.sql" />
+    <Build Include="dbo\Tables\TestingNewReport.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Miscellaneous\SqlSchemaCompare.scmp" />
