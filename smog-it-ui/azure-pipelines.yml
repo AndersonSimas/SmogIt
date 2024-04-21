@@ -33,7 +33,7 @@ stages:
           - task: NodeTool@0
             displayName: 'Install Node.js'
             inputs:
-              versionSpec: '16.x'
+              versionSpec: '18.x'
           - script: |
               cd ${{variables.SolutionFolder}}
               npm install
