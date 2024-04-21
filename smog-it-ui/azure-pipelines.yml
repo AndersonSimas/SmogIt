@@ -19,7 +19,7 @@ variables:
   SolutionFolder: "smog-it-ui"
   artifactName: 'SmogItWebApp'
 
-name: SmogItDB.WebApp.$(date:yyyyMMdd)$(rev:.r)
+name: SmogIt.WebApp.$(date:yyyyMMdd)$(rev:.r)
 
 stages:
   - stage: Build
