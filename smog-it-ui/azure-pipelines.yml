@@ -1,0 +1,55 @@
+# Node.js with React
+# Build a Node.js project that uses React.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+  branches:
+    include:
+      - main
+
+resources:
+  repositories:
+  - repository: AndersonSimas/SmogIt
+    type: github
+    name: AndersonSimas/SmogIt
+    endpoint: 'GitConnection - AndersonSimas'
+
+variables:
+  SolutionFolder: "smog-it-ui"
+  artifactName: 'SmogItWebApp'
+
+name: SmogItDB.WebApp.$(date:yyyyMMdd)$(rev:.r)
+
+stages:
+  - stage: Build
+    displayName: "Build WebApp"
+    jobs:
+      - job: InstallNodejs
+        displayName: "Install Node.js"
+        pool:
+          vmImage: ubuntu-latest
+        steps:
+          - task: NodeTool@0
+            displayName: 'Install Node.js'
+            inputs:
+              versionSpec: '16.x'
+          - script: |
+              cd ${{variables.SolutionFolder}}
+              npm install
+              npm run build
+            displayName: 'npm install and build'
+          - task: CopyFiles@2
+            displayName: "Copy Project Files"
+            inputs:
+              SourceFolder: "$(Build.SourcesDirectory)"
+              Contents: |
+                src/*
+                public/*
+              TargetFolder: "$(Build.ArtifactStagingDirectory)"
+          - task: PublishBuildArtifacts@1
+            displayName: "Publish npm Artifact"
+            inputs:
+              PathtoPublish: "$(Build.ArtifactStagingDirectory)"
+              ArtifactName: ${{variables.artifactName}}
+              publishLocation: 'Container'
