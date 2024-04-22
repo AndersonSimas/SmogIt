@@ -16,7 +16,7 @@ variables:
   BuildConfiguration : 'release'
   artifactName: 'SmogItDB'
 
-name: SmogItDB.$(date:yyyyMMdd)$(rev:.r)
+name: SmogIt.DB.$(date:yyyyMMdd)$(rev:.r)
 
 stages:
   - stage: Build
